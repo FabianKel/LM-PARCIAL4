@@ -1,0 +1,14 @@
+Q: ["q0", "q1", "qaccept", "qreject"]
+Σ: ["0", "1"]  # Alfabeto de entrada
+Γ: ["0", "1", "_"]  # Alfabeto de la cinta, incluye el símbolo blanco "_"
+q0: "q0"
+qaccept: "qaccept"
+qreject: "qreject"
+δ:
+  "q0":
+    "0": [["q1", "0", "R"], ["q0", "1", "R"]]  # Ejemplo de no determinismo
+    "1": [["qreject", "1", "R"]]
+  "q1":
+    "0": [["qaccept", "0", "R"]]
+    "1": [["q1", "1", "L"]]
+cadena: "001"
