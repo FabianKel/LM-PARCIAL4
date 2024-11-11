@@ -1,0 +1,5 @@
+State: q0, Position: 0, Tape: 0001110002_
+State: q1, Position: 1, Tape: 0001110002_
+State: q0, Position: 1, Tape: 1001110002_
+State: qaccept, Position: 2, Tape: 0001110002_
+Result: Accepted

@@ -11,12 +11,12 @@ class TuringMachine:
         self.tape = []
         self.head_position = 0
 
-        self.validate_configuration()
+        self.validate_configuration(config)  # Pasar config como parámetro
 
-    def validate_configuration(self):
+    def validate_configuration(self, config):
         required_keys = ["Q", "Σ", "Γ", "q0", "qaccept", "qreject", "δ"]
         for key in required_keys:
-            if key not in self.__dict__:
+            if key not in config:
                 raise ValueError(f"Configuration missing required key: {key}")
         
         if self.accept_state not in self.states or self.reject_state not in self.states:
