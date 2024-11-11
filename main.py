@@ -36,7 +36,6 @@ if __name__ == "__main__":
             cadena = input("Ingrese una cadena para la simulación: ")
         
         # Ejecutar la simulación y guardar el resultado en un archivo .txt
-        if config.get("description", "") != "":
-                print(f"Descripción: {config.get("description", "")}")
+
         result = simulator.simulate(cadena, output_file=output_file)
         print(f"Result for {config_file}: {result}")
