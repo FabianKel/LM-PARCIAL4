@@ -1,20 +1,19 @@
-from collections import deque
+from collections import deque, defaultdict
 
 class Simulator:
     def __init__(self, turing_machine):
         self.tm = turing_machine
-        self.visited_states = set()
+        self.visited_states = defaultdict(int)  # Track each configuration's occurrence
 
     def simulate(self, input_string, output_file="output.txt"):
         self.tm.reset(input_string)
-        configurations = deque([(self.tm.current_state, self.tm.head_position, self.tm.tape[:])])
+        configurations = deque([(self.tm.current_state, self.tm.head_position, tuple(self.tm.tape))])
         steps = []
 
         while configurations:
             state, position, tape = configurations.popleft()
-            self.tm.current_state, self.tm.head_position, self.tm.tape = state, position, tape
+            self.tm.current_state, self.tm.head_position, self.tm.tape = state, position, list(tape)
 
-            # Guardar el estado actual en los pasos y en el archivo de salida
             current_configuration = f"State: {state}, Position: {position}, Tape: {''.join(tape)}"
             steps.append(current_configuration)
             print(current_configuration)
@@ -25,13 +24,15 @@ class Simulator:
             elif self.tm.is_rejecting():
                 self.save_output("Rejected", steps, output_file)
                 return "Rejected"
-            elif (state, position) in self.visited_states:
-                continue
+            elif self.visited_states[(state, position, tuple(tape))] >= 3:  # Loop detection
+                self.save_output("Infinite Loop", steps, output_file)
+                return "Infinite Loop"
             else:
-                self.visited_states.add((state, position))
-                for next_state, write_symbol, direction in self.tm.step():
-                    if next_state:
-                        new_tape = tape[:]
+                self.visited_states[(state, position, tuple(tape))] += 1
+                for result in self.tm.step():
+                    if result is not None:  # Ensure result is not None
+                        next_state, write_symbol, direction = result
+                        new_tape = list(tape)
                         if 0 <= position < len(new_tape):
                             new_tape[position] = write_symbol
                         else:
@@ -44,7 +45,7 @@ class Simulator:
                         elif new_position >= len(new_tape):
                             new_tape.append("_")
 
-                        configurations.append((next_state, new_position, new_tape))
+                        configurations.append((next_state, new_position, tuple(new_tape)))
 
         self.save_output("Rejected", steps, output_file)
         return "Rejected"
@@ -53,3 +54,4 @@ class Simulator:
         with open(output_file, "w") as file:
             file.write("\n".join(steps))
             file.write(f"\nResult: {result}\n")
+
