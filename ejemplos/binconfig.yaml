@@ -1,0 +1,13 @@
+Q: ["q0", "q1", "qaccept", "qreject"]
+Σ: ["0", "1"]
+Γ: ["0", "1", "_"]
+q0: "q0"
+qaccept: "qaccept"
+qreject: "qreject"
+δ:
+  "q0":
+    "1": [["q0", "0", "R"]]
+    "0": [["q0", "1", "R"]]
+    "_": [["qaccept", "_", "R"]]
+cadena: "10001100"
+description: "Proporciona el complemento a 1 de un num binario"

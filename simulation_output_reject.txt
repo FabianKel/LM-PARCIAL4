@@ -1,0 +1,3 @@
+State: q0, Position: 0, Tape: 20000_
+State: qreject, Position: 1, Tape: 20000_
+Result: Rejected

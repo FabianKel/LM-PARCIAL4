@@ -1,0 +1,23 @@
+Q: ["q0", "q1", "qaccept", "qreject"]
+Σ: ["0", "1"]
+Γ: ["0", "1", "_"]
+q0: "q0"
+qaccept: "qaccept"
+qreject: "qreject"
+δ:
+  "q0":
+    "0": [["q0", "0", "R"]]
+    "1": [["q0", "1", "R"]]
+    "_": [["q1", "_", "L"]]
+  "q1":
+    "1": [["q1", "0", "L"]]
+    "0": [["qaccept", "1", "L"]]
+    "B": [["qaccept", "1", "L"]]
+cadena: "1110"
+description: "Calcula el num consecutivo en binario de 4 dijitos"
+
+#Resultados esperados:
+# "0000" -> "0001"
+# "0001" -> "0010"
+# "1010" -> "1011"
+# "1110" -> "1111"

@@ -1,0 +1,8 @@
+State: q0, Position: 0, Tape: 0000121_
+State: qloop, Position: 1, Tape: 0000121_
+State: q0, Position: 0, Tape: 0000121_
+State: qloop, Position: 1, Tape: 0000121_
+State: q0, Position: 0, Tape: 0000121_
+State: qloop, Position: 1, Tape: 0000121_
+State: q0, Position: 0, Tape: 0000121_
+Result: Infinite Loop
